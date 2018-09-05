@@ -1,0 +1,14 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+dependencies {
+  compile 'com.sendgrid:sendgrid-java:4.0.1'
+  compile 'com.fasterxml.jackson.core:jackson-annotations:2.9.6'
+}
+
+repositories {
+  mavenCentral()
+}
+
+mainClassName = "com.example.Example"
+
