@@ -1,0 +1,6 @@
+Generate an api key with your sengrid account and run the following commands:
+
+echo "export SENDGRID_API_KEY='YOUR_API_KEY'" > sendgrid.env
+echo "sendgrid.env" >> .gitignore
+source ./sendgrid.env
+
