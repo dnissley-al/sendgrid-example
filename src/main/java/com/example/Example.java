@@ -7,7 +7,8 @@ public class Example {
   public static void main(String[] args) throws IOException {
     //sendSimpleEmail();
     //getTemplate();
-    sendTemplatedEmail();
+    getAllTemplates();
+    //sendTemplatedEmail();
   }
 
   public static void sendTemplatedEmail() throws IOException {
@@ -50,6 +51,22 @@ public class Example {
       Request request = new Request();
       request.setMethod(Method.GET);
       request.setEndpoint("templates/d-4c01c7d9c28a4349a3d4d51230693848");
+      Response response = sg.api(request);
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getBody());
+      System.out.println(response.getHeaders());
+    } catch (IOException ex) {
+      throw ex;
+    }
+  }
+
+  public static void getAllTemplates() throws IOException {
+    try {
+      SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
+      Request request = new Request();
+      request.setMethod(Method.GET);
+      request.setEndpoint("templates");
+      request.addQueryParam("generations", "dynamic");
       Response response = sg.api(request);
       System.out.println(response.getStatusCode());
       System.out.println(response.getBody());
