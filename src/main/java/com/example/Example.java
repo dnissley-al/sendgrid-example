@@ -7,8 +7,33 @@ public class Example {
   public static void main(String[] args) throws IOException {
     //sendSimpleEmail();
     //getTemplate();
-    getAllTemplates();
+    //getAllTemplates();
     //sendTemplatedEmail();
+    sendCustomTemplatedEmail();
+  }
+
+  public static void sendCustomTemplatedEmail() throws IOException {
+    Email from = new Email("test@example.com");
+    String subject = "Test Subject {{name}} {{city}}";
+    Email to = new Email("dylan.nissley@gmail.com");
+    Content content = new Content("text/html", "<strong>Name: {{name}}</strong><br>City: {{city}}asdf");
+    Mail mail = new Mail(from, subject, to, content);
+    mail.personalization.get(0).addSubstitution("{{name}}", "Example User");
+    mail.personalization.get(0).addSubstitution("{{city}}", "Denver");
+
+    SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
+    Request request = new Request();
+    try {
+      request.setMethod(Method.POST);
+      request.setEndpoint("mail/send");
+      request.setBody(mail.build());
+      Response response = sg.api(request);
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getBody());
+      System.out.println(response.getHeaders());
+    } catch (IOException ex) {
+      throw ex;
+    }   
   }
 
   public static void sendTemplatedEmail() throws IOException {
