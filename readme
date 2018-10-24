@@ -3,4 +3,8 @@ Generate an api key with your sengrid account and run the following commands:
 echo "export SENDGRID_API_KEY='YOUR_API_KEY'" > sendgrid.env
 source ./sendgrid.env
 
+Then you can run the code with:
+
+gradle run
+
 Note: Sending to homeadvisor email addresses doesn't seem to work. Probably best to send to your personal gmail, etc.
